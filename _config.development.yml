@@ -1,0 +1,6 @@
+mode: 'development'
+
+assets:
+  debug: true
+  cachebust: none
+  cache: true

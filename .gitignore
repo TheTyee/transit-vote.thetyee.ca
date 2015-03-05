@@ -1,0 +1,10 @@
+_site
+.DS_Store
+.swp
+.jekyll-assets-cache
+.bundle
+node_modules
+bower_components
+_Archive
+_vendor
+Gemfile.lock

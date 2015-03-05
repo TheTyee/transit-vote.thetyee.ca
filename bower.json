@@ -1,0 +1,26 @@
+{
+  "name": "static-app-template.thetyee.ca",
+  "version": "0.0.1",
+  "authors": [
+    "Phillip Smith <ps@phillipadsmith.com>"
+  ],
+  "description": "Transit Referendum",
+  "license": "MIT",
+  "homepage": "static-app-template.thetyee.ca",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "modernizr": "~2.8.3",
+    "backbone": "~1.1.2",
+    "layoutmanager": "~0.9.5",
+    "tabletop": "~1.4.0",
+    "isotope": "~2.1.1"
+  }
+}
