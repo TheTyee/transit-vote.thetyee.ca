@@ -265,16 +265,18 @@ App.LocationsListView = Backbone.View.extend({
             var filterClass;
             if ( $( elem ).val() === '*' ) {
                 filterClass = '*';
+                // Reset the stats
+                App.stats.calculate(App.councillors);
             } else {
                 filterClass = '.' + $( elem ).val();
+                // Filter the stats
+                App.filteredCouncillors = new App.CouncillorsCollection();
+                var municipality = App.councillors.where({municipality: selection });
+                App.filteredCouncillors.reset(municipality);
+                App.stats.calculate(App.filteredCouncillors);
             }
             // Filter the gallery
             App.container.isotope({filter: filterClass });
-            // Filter the stats
-            App.filteredCouncillors = new App.CouncillorsCollection();
-            var municipality = App.councillors.where({municipality: selection });
-            App.filteredCouncillors.reset(municipality);
-            App.stats.calculate(App.filteredCouncillors);
         }
     }
 });
