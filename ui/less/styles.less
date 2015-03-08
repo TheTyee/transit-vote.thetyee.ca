@@ -69,6 +69,11 @@ Variables
 @labelGreen: #008000;
 @labelNdp: #FF8733;
 
+@color_no: red;
+@color_yes: green;
+@color_undecided: white;
+@color_noresponse: white;
+
 
 /* ==========================================================================
 Global 
@@ -100,13 +105,98 @@ Modules
     width: 24%; 
     height: 200px;
     margin-right: 2px;
+    display: table;
+    text-align: center;
 }
 .councillor .info {
-  color: white;
-  text-shadow: black 1px 2px 3px;
-  text-align: center;
+    color: white;
+    text-shadow: black 1px 2px 3px;
+    display: table-cell;
+    vertical-align: bottom;
+
 }
 .photo img { max-width: 50px; }
+
+.councillor .glyphicon {
+    margin: 4px;
+    text-shadow: black 1px 1px 1px;
+}
+
+.glyphicon-ok-circle {
+    font-size: 2em;
+    color: @color_yes;
+}
+.glyphicon-remove-circle {
+    font-size: 2em;
+    color: @color_no;
+}
+
+.glyphicon-question-sign {
+    font-size: 1.4em;
+    color: #ccc;
+}
+.glyphicon-exclamation-sign {
+    font-size: 1.4em;
+    color: #ccc;
+}
+
+
+
+#locations select {
+    width: 240px;
+    height: 34px;
+    overflow: hidden;
+    //background: url(new_arrow.png) no-repeat right #ddd;
+    border: 1px solid #ccc;
+}
+
+#charts {
+    margin: 10px 0 20px 0;
+}
+
+#charts div {
+    float: left;
+    width: 49%;
+    margin-right: 2px;
+    text-align: center;
+}
+
+#charts #no {
+    background: @color_no;
+}
+#charts #yes {
+    background: @color_yes;
+}
+#charts #und {
+    width: 100%;
+    background: @color_undecided;
+}
+#charts #dnr {
+    width: 100%;
+    background: @color_noresponse;
+}
+
+#charts #no, #charts #yes {
+    color: white; 
+    text-shadow: black 1px 2px 3px;
+    span.percent {
+        font-size: 4em;
+        font-weight: bold;
+    }
+
+    span.position {
+        font-size: 2em;
+        font-weight: bold;
+    }
+}
+
+
+
+#quotes blockquote {
+    font-size: 1.8em;
+}
+#quotes blockquote small {
+}
 
 /* ==========================================================================
 Progressively enhance for larger screens 
