@@ -47,6 +47,68 @@ App.public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1G36PR7bNNq
 App.storage = Tabletop.init( { key: App.public_spreadsheet_url, wait: true } );
 
 // Models
+
+App.Calculator = Backbone.Model.extend({
+    defaults: {
+        // Just a reminder of what's in the model
+        position_yes: 0,
+        position_no: 0,
+        position_count: 0,
+        position_und: 0,
+        position_dnr: 0,
+        percent_yes: 0,
+        percent_no: 0,
+        percent_und: 0,
+        percent_dnr: 0
+    },
+    initialize: function(){
+    },
+    calculate: function(collection) { // Always pass a collection object
+        this.set("position_yes", 0);
+        this.set("position_no", 0);
+        this.set("position_count", 0);
+        this.set("position_und", 0);
+        this.set("position_dnr", 0);
+        this.set("percent_yes", 0);
+        this.set("percent_no", 0);
+        this.set("percent_und", 0);
+        this.set("percent_dnr", 0);
+        var self = this;
+        collection.each(function(m) {
+            var count = self.get("position_count");
+            var yes = self.get("position_yes");
+            var no = self.get("position_no");
+            var und = self.get("position_und");
+            var dnr = self.get("position_dnr");
+            self.set("position_count", count + 1);
+            var position = m.get("position");
+            switch(position) {
+                case "Yes":
+                    self.set("position_yes", yes +1);
+                break;
+                case "No":
+                    self.set("position_no", no +1);
+                break;
+                case "Undecided":
+                    self.set("position_und", und +1);
+                break;
+                case "Did not respond":
+                    self.set("position_dnr", dnr +1);
+                break;
+            } 
+        });
+        var count = self.get("position_count");
+        var yes = self.get("position_yes");
+        var no = self.get("position_no");
+        var und = self.get("position_und");
+        var dnr = self.get("position_dnr");
+        self.set("percent_yes", Math.round(yes / count * 100) );
+        self.set("percent_no", Math.round(no / count * 100) );
+        self.set("percent_und", Math.round(und / count * 100) );
+        self.set("percent_dnr", Math.round(dnr / count * 100) );
+    }
+});
+
 App.Councillor = Backbone.Model.extend({
     defaults: {
         "photo": "/assets/default-m.png",
@@ -63,7 +125,7 @@ App.Councillor = Backbone.Model.extend({
     slugify: function(text)
     // Should move to a utility object
     {
-      return text.toString().toLowerCase()
+        return text.toString().toLowerCase()
         .replace(/\s+/g, '-')           // Replace spaces with -
         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
@@ -151,6 +213,7 @@ App.QuotesListView = Backbone.View.extend({
     events: {
     },
     beforeRender: function() {
+        // This is kinda' silly, but only one quote is needed for now
         var shuffled = this.collection.shuffle();
         var quote    = shuffled.pop(1);
         if (quote) {
@@ -171,9 +234,6 @@ App.QuotesListItemView = Backbone.View.extend({
     template: "quotes-list-item"
 });
 
-// View: ChartList
-// View: ChartListItem
-
 // View: LocationList
 App.LocationsListView = Backbone.View.extend({
     //el: false,
@@ -191,15 +251,16 @@ App.LocationsListView = Backbone.View.extend({
     beforeRender: function() {
         // Add the subviews to the view
         this.collection.each(function(location) {
-                this.insertView("#locations-list", new App.LocationsListItemView({
-                    model: location
-                }));
+            this.insertView("#locations-list", new App.LocationsListItemView({
+                model: location
+            }));
         }, this);
     },
     afterRender: function() {
     },
     filterList: function(e) {
         var elem = e.currentTarget;
+        var selection = $( "select#locations-list option:selected" ).text();
         if ( elem.nodeName === 'SELECT') {
             var filterClass;
             if ( $( elem ).val() === '*' ) {
@@ -207,7 +268,13 @@ App.LocationsListView = Backbone.View.extend({
             } else {
                 filterClass = '.' + $( elem ).val();
             }
+            // Filter the gallery
             App.container.isotope({filter: filterClass });
+            // Filter the stats
+            App.filteredCouncillors = new App.CouncillorsCollection();
+            var municipality = App.councillors.where({municipality: selection });
+            App.filteredCouncillors.reset(municipality);
+            App.stats.calculate(App.filteredCouncillors);
         }
     }
 });
@@ -238,16 +305,16 @@ App.CouncillorsListView = Backbone.View.extend({
     beforeRender: function() {
         // Add the subviews to the view
         this.collection.each(function(councillor) {
-                this.insertView("#councillors-list", new App.CouncillorsListItemView({
-                    model: councillor
-                }));
+            this.insertView("#councillors-list", new App.CouncillorsListItemView({
+                model: councillor
+            }));
         }, this);
     },
     afterRender: function() {
         App.container = $('#councillors-list');
         App.container.isotope({
-          itemSelector: '.councillor',
-          layoutMode: 'fitRows'
+            itemSelector: '.councillor',
+            layoutMode: 'fitRows'
         });
     },
 });
@@ -258,6 +325,26 @@ App.CouncillorsListItemView = Backbone.View.extend({
     initialize: function(options) {
     },
     template: "councillors-list-item"
+});
+
+// View: ChartList
+
+
+// View: ChartListItem
+App.stats = new App.Calculator();
+App.PositionScoreboardView = Backbone.View.extend({
+    model: App.stats,
+    initialize: function(options) {
+        // Listen to events on the collection
+        this.listenTo(this.model, "change", this.render);
+    },
+    template: "position-scoreboard",
+    events: {
+    },
+    beforeRender: function() {
+    },
+    afterRender: function() {
+    }
 });
 
 // ===================================================================
@@ -271,7 +358,8 @@ App.Layout = new Backbone.Layout({
         //"footer": new App.FooterView()
         "#quotes": new App.QuotesListView(),
         "#locations": new App.LocationsListView(),
-        "#councillors": new App.CouncillorsListView()
+        "#councillors": new App.CouncillorsListView(),
+        "#scoreboard": new App.PositionScoreboardView()
     }
 });
 
@@ -280,7 +368,7 @@ $(document).ready( function() {
     App.councillors.fetch({ success: function(councillors) { 
         var quotes_only = App.councillors.reject(function(c){ return c.get("quote") === ''; });
         var quotes = quotes_only.map(function(c){ 
-                return { "text": c.get("quote"), "id": c.get("id"), "fullname": c.get("fullname") };
+            return { "text": c.get("quote"), "id": c.get("id"), "fullname": c.get("fullname") };
         });
         App.quotes.reset(quotes_only);
         var cities = App.councillors.each(function(c){
@@ -288,6 +376,9 @@ $(document).ready( function() {
                 App.locations.add({ "municipality": c.get("municipality"), "municipalityId": c.get("municipalityId") });
             }
         });
+        //App.calculator = new App.Calculator();
+        //App.calculator.calculate(councillors);
+        App.stats.calculate(councillors);
     } });
     App.Layout.render();
 });
