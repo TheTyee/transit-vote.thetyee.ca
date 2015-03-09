@@ -1,0 +1,33 @@
+<!-- Modal -->
+<div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="councillorName" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="councillorName"><%= fullname %>, <%= municipality %></h4>
+      </div>
+      <div class="modal-body">
+          <h5 id="detail-position">Position: <%= position %></p>
+          <% if ( quote ) { %>
+          <blockquote><%= quote %></blockquote>
+          <% } %>
+          <% if ( website_city ) { %>
+          <p id="detail-web-city"><a href="<%= website_city %>"><%= fullname %>'s page on the <%= municipality %> website.</a></p>
+          <% } %>
+          <% if ( website_personal ) { %>
+          <p id="detail-web-personal"><a href="<%= website_personal %>"<%= fullname %> personal website </a></p>
+          <% } %>
+          <p id="email"><i class="fa fa-envelope"></i> <a href="mailto:<%= email %>"><%= email %></a></p>
+          <p id="phone"><i class="fa fa-phone"></i> <%= phone %></p>
+          <p id="twitter"><i class="fa fa-twitter"></i> <a href="https://twitter.com/<%= twitter %>"><%= twitter %></a></p>
+          <p id="linkedin"><i class="fa fa-linkedin"></i> <a href="<%= linkedin %>"><%= linkedin %></a></p>
+          <p id="facebook"><i class="fa fa-facebook"></i> <a href="<%= facebook %>"><%= facebook %></a></p>
+          <hr class="soften">
+          <p class="info-missing">Information missing? Please <a href="mailto:editor@thetyee.ca">send us a note with the details</a>.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

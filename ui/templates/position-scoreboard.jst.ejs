@@ -1,20 +1,20 @@
 <div id="charts">
-    <div id="yes"><span class="percent"><%= percent_yes %>%</span>
+    <div id="yes" class="positionId" data-position="yes"><span class="percent"><%= percent_yes %>%</span>
         <br />
         <span class="position">Yes</span>
         <br />
         <span class="count">(<%= position_yes %> of <%= position_count %>)</span>
     </div>
-    <div id="no"><span class="percent"><%= percent_no %>%</span>
+    <div id="no" class="positionId" data-position="no"><span class="percent"><%= percent_no %>%</span>
         <br />
         <span class="position">No</span>
         <br />
         <span class="count">(<%= position_no %> of <%= position_count %>)</span>
     </div>
-    <div id="und">
+    <div id="und" class="positionId" data-position="undecided">
         <span class="percent"><%= percent_und %>%</span> <span class="position">Undecided</span>
         <span class="count">(<%= position_und %> of <%= position_count %>)</span></div>
-    <div id="dnr">
+    <div id="dnr" class="positionId" data-position="did-not-respond">
         <span class="percent"><%= percent_dnr %>%</span> <span class="position">Did not respond</span> 
         <span class="count">(<%= position_dnr %> of <%= position_count %>)</span>
     </div>
