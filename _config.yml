@@ -1,40 +1,37 @@
 # Project settings - General
 version: 0.0.1
-title: "Transit Referendum 2015 - The Tyee"
-subtitle: "Transit Referendum 2015"
-description: "Transit Referendum 2015"
+title: "Transit Vote 2015 - The Tyee"
+subtitle: "Transit Vote 2015"
+description: "The Transit Question"
+date: "March 9, 2015"
 baseurl: ""
-url: "http://referendum.thetyee.ca"
+url: "http://transit-vote.thetyee.ca"
 
 # Project settings - Analytics
 analytics:
-    ga_tracking_id: 'UA-12345-5'
+    ga_tracking_id: 'UA-169022-1'
 
 # Project settings - Meta
 author: "The Tyee"
 robots: "index, follow"
 revisit: "1 day"
 copyright: "&copy; The Tyee 2015"
-
-# Project settings - Assets
-asset_paths:
-    img: ""
-    js:  ""
+authors: "Tyee Staff"
+updated: "March 9th, 2015"
 
 # Project settings - URLs
 urls:
-    display: 'project-name.thetyee.ca'
-    privacy: 'http://project-name.thetyee.ca/privacy_url'
-    credits: 'http://project-name.thetyee.ca/credits_url'
-    credits: 'http://github.com/TheTyee/project-name'
+    display: 'transit-vote.thetyee.ca'
+    privacy: 'http://subscribe.thetyee.ca/privacy/'
+    credits: '/credits'
+    github: 'https://github.com/TheTyee/transit-vote.thetyee.ca'
 
 # Project settings - Social
 social:
     facebook:
         fb_admins:
             - 12345
-        og_url:
-        og_image:
+        og_image: 'http://transit-site.thetyee.ca/ui/img/transit-vote-share.png'
         og_sitename:
     twitter:
     gplus:
@@ -55,17 +52,8 @@ exclude:
   - _fullsize
   - _thumbs
   - _data
-asset_bundler:
-  # Asset bundler plugin - not used in this version
-  compress:
-    js: yui 
-    css: yui 
-  base_path: /assets/
-  # When not in development mode, reference assets on the CDN site
-  # TODO update this to the CDN link
-  server_url: http://static-template.apps.thetyee.ca
+# jekyll-assets pipeline - currently using this
 assets:
-  # jekyll-assets pipeline - currently using this
   # Pathname of the destination of generated (bundled) assets relative
   # to the destination of the root.
   dirname: assets
