@@ -17,9 +17,9 @@
     <meta property="og:description" content="{{ site.description }}" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ site.url }}" />
-    <meta property="og:image" content="{{ site.asset_paths.img }}{{ site.image }}" />
-    <meta property="og:site_name" content="{{ site.name }}" />
-    <meta property="fb:admins" content="{{ site.fb_admins }}" />
+    <meta property="og:image" content="{{ site.asset_paths.img }}{{ site.social.facebook.og_image }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
+    <meta property="fb:admins" content="{{ site.social.facebook.fb_admins }}" />
     <!-- Dublin Core properties -->
     <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
     <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
@@ -31,7 +31,7 @@
     <meta name="DC.language" scheme="DCTERMS.URI" content="English" />
     <!-- /Meta -->
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="{{ site.asset_paths.img }}ui/img/favicon.ico">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
     <!-- CSS -->
     <!-- jekyll-assets pipeline -->
