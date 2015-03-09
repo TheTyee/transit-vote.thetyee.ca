@@ -1,4 +1,5 @@
-<div class="councillor <%= municipalityId %> <%= positionId %>" id="<%= id %>" data-id="<%= id %>" style="">
+<div class="councillor <%= municipalityId %> <%= positionId %>" id="<%= id %>" data-id="<%= id %>" style="background-image: url('/ui/img/thumbs/<%= id %>.jpg'); background-size: cover;">
+    <div class="position-icon">
     <% if ( position === "Yes" ) { %>
     <i class="glyphicon glyphicon-ok-circle"></i>
     <% } else if ( position === "No" ) { %>
@@ -8,11 +9,11 @@
     <% } else if ( position === "Did not respond" ) { %>
     <i class="glyphicon glyphicon-exclamation-sign"></i>
     <% } %>
-    <div class="photo">
-        <!--<img src="<%= photo %>" />-->
     </div>
     <div class="info">
-    <h3><%= fullname %></h3>
-    <h4><%= municipality %></h4>
+        <div>
+        <h3><%= fullname %></h3>
+        <h4><%= municipality %></h4>
+        </div>
     </div>
 </div>

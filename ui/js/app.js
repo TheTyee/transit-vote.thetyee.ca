@@ -227,7 +227,7 @@ App.QuotesListView = Backbone.View.extend({
 });
 // View: QuoteListItem
 App.QuotesListItemView = Backbone.View.extend({
-    el: false,
+    //el: false,
     initialize: function(options) {
     },
     template: "quotes-list-item"
@@ -331,7 +331,7 @@ App.CouncillorsListView = Backbone.View.extend({
 
 // View: CouncillorsListItem
 App.CouncillorsListItemView = Backbone.View.extend({
-    el: false,
+    //el: false,
     initialize: function(options) {
     },
     template: "councillors-list-item"
@@ -345,9 +345,6 @@ App.CouncillorDetailView = Backbone.View.extend({
          $('#modalDetail').modal();
     }
 });
-
-
-// View: ChartList
 
 
 // View: ChartListItem
@@ -369,8 +366,13 @@ App.PositionScoreboardView = Backbone.View.extend({
     filterList: function(e) {
         var positionId = $( e.currentTarget ).attr("data-position");
             var filterClass = '.' + positionId;
-                // Filter the stats
+            // Filter the stats
             App.container.isotope({filter: filterClass });
+            // Reset the region select
+            $('#locations-list').find('option:first').attr('selected', 'selected');
+            // Reset the stats
+            App.stats.calculate(App.councillors);
+            
         }
 });
 
