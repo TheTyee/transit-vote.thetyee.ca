@@ -72,8 +72,9 @@ Variables
 
 @color_no: red;
 @color_yes: green;
-@color_undecided: white;
-@color_noresponse: white;
+@color_undecided: @lightGray;
+@color_noresponse: darken(@lightGray, 5%);
+@color_nocomment: darken(@lightGray, 10%);
 
 
 /* ==========================================================================
@@ -103,12 +104,12 @@ header {
         padding: 0;
         text-align: center;
     }
-    h1 {
+    h2 {
         text-indent: -5000px;
         background: url('/ui/img/tyee_logo.png') top center no-repeat;
         padding-top: 50px;
     }
-    h2 {
+    h3 {
         background: @darkBlue;
         color: white;
     }
@@ -117,6 +118,9 @@ header {
 
 .container {
     background: white;
+}
+.meta {
+    color: @gray;
 }
 
 .sharing {
@@ -162,6 +166,7 @@ h4.modal-title {
     height: 200px;
     margin-right: 2px;
     text-align: center;
+    cursor: pointer;
 }
 .councillor .info {
     color: white;
@@ -204,6 +209,10 @@ h4.modal-title {
     font-size: 1.4em;
     color: #ccc;
 }
+.glyphicon-ban-circle{
+    font-size: 1.4em;
+    color: #ccc;
+}
 
 #locations select {
     width: 240px;
@@ -213,15 +222,17 @@ h4.modal-title {
     border: 1px solid #ccc;
 }
 
+#locations label {
+    text-transform: uppercase;
+}
+
 #charts {
     margin: 10px 0 20px 0;
 }
 
 #charts div {
-    float: left;
-    width: 49%;
-    margin-right: 4px;
     text-align: center;
+    cursor: pointer;
 }
 
 #charts #no {
@@ -230,26 +241,37 @@ h4.modal-title {
 #charts #yes {
     background: @color_yes;
 }
+
+#charts .secondary div {
+    padding: 10px 0 10px 0;
+}
+#charts .secondary div span.percent {
+    font-size: 1.2em;
+    font-weight: bold;
+}
 #charts #und {
-    width: 100%;
     background: @color_undecided;
 }
 #charts #dnr {
-    width: 100%;
     background: @color_noresponse;
+}
+#charts #nc {
+    background: @color_nocomment;
 }
 
 #charts #no, #charts #yes {
     color: white; 
     text-shadow: black 1px 2px 3px;
+    padding-bottom: 10px;
     span.percent {
         font-size: 4em;
         font-weight: bold;
     }
 
     span.position {
-        font-size: 2em;
+        font-size: 3em;
         font-weight: bold;
+        line-height: 14px;
     }
 }
 
