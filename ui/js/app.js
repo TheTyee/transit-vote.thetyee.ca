@@ -56,10 +56,12 @@ App.Calculator = Backbone.Model.extend({
         position_count: 0,
         position_und: 0,
         position_dnr: 0,
+        position_nc: 0,
         percent_yes: 0,
         percent_no: 0,
         percent_und: 0,
-        percent_dnr: 0
+        percent_dnr: 0,
+        percent_nc: 0
     },
     initialize: function(){
     },
@@ -69,10 +71,12 @@ App.Calculator = Backbone.Model.extend({
         this.set("position_count", 0);
         this.set("position_und", 0);
         this.set("position_dnr", 0);
+        this.set("position_nc", 0);
         this.set("percent_yes", 0);
         this.set("percent_no", 0);
         this.set("percent_und", 0);
         this.set("percent_dnr", 0);
+        this.set("percent_nc", 0);
         var self = this;
         collection.each(function(m) {
             var count = self.get("position_count");
@@ -80,6 +84,7 @@ App.Calculator = Backbone.Model.extend({
             var no = self.get("position_no");
             var und = self.get("position_und");
             var dnr = self.get("position_dnr");
+            var nc = self.get("position_nc");
             self.set("position_count", count + 1);
             var position = m.get("position");
             switch(position) {
@@ -95,32 +100,31 @@ App.Calculator = Backbone.Model.extend({
                 case "Did not respond":
                     self.set("position_dnr", dnr +1);
                 break;
-            } 
+                case "No comment":
+                    self.set("position_nc", nc +1);
+                break;
+            }
         });
         var count = self.get("position_count");
         var yes = self.get("position_yes");
         var no = self.get("position_no");
         var und = self.get("position_und");
         var dnr = self.get("position_dnr");
+        var nc = self.get("position_nc");
         self.set("percent_yes", Math.round(yes / count * 100) );
         self.set("percent_no", Math.round(no / count * 100) );
         self.set("percent_und", Math.round(und / count * 100) );
         self.set("percent_dnr", Math.round(dnr / count * 100) );
+        self.set("percent_nc", Math.round(nc / count * 100) );
     }
 });
 
 App.Councillor = Backbone.Model.extend({
-    defaults: {
-        "photo": "/assets/default-m.png",
-        "municipalityId": "",
-        "positionId": ""
-    },
     initialize: function(){
         var municipality =  this.get('municipality');
         var position =  this.get('position');
         this.set('municipalityId', this.slugify(municipality));
         this.set('positionId', this.slugify(position));
-        this.checkImage();
     },
     slugify: function(text)
     // Should move to a utility object
@@ -131,13 +135,6 @@ App.Councillor = Backbone.Model.extend({
         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
         .replace(/^-+/, '')             // Trim - from start of text
         .replace(/-+$/, '');            // Trim - from end of text
-    },
-    checkImage: function() {
-        var self = this;
-        var photo = self.get('photo');
-        if (!photo) {
-            this.set('photo', '/ui/img/default-m.png');
-        }
     }
 });
 
@@ -198,7 +195,6 @@ App.ChartCollection = Backbone.Collection.extend({
 });
 
 // Views
-// 
 // View: QuotesList
 App.QuotesListView = Backbone.View.extend({
     //el: false,

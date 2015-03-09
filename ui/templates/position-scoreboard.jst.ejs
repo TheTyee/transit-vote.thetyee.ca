@@ -1,22 +1,38 @@
 <div id="charts">
-    <div id="yes" class="positionId" data-position="yes"><span class="percent"><%= percent_yes %>%</span>
-        <br />
-        <span class="position">Yes</span>
-        <br />
-        <span class="count">(<%= position_yes %> of <%= position_count %>)</span>
+    <div class="row primary">
+        <div id="yes" class="positionId col-sm-6" data-position="yes" title="Click to filter by Yes votes"><span class="percent"><%= percent_yes %>%</span>
+            <br />
+            <span class="position">Yes</span>
+            <br />
+            <span class="count">(<%= position_yes %> of <%= position_count %>)</span>
+        </div>
+        <div id="no" class="positionId col-sm-6" data-position="no" title="Click to filter by No votes"><span class="percent"><%= percent_no %>%</span>
+            <br />
+            <span class="position">No</span>
+            <br />
+            <span class="count">(<%= position_no %> of <%= position_count %>)</span>
+        </div>
     </div>
-    <div id="no" class="positionId" data-position="no"><span class="percent"><%= percent_no %>%</span>
-        <br />
-        <span class="position">No</span>
-        <br />
-        <span class="count">(<%= position_no %> of <%= position_count %>)</span>
-    </div>
-    <div id="und" class="positionId" data-position="undecided">
-        <span class="percent"><%= percent_und %>%</span> <span class="position">Undecided</span>
-        <span class="count">(<%= position_und %> of <%= position_count %>)</span></div>
-    <div id="dnr" class="positionId" data-position="did-not-respond">
-        <span class="percent"><%= percent_dnr %>%</span> <span class="position">Did not respond</span> 
-        <span class="count">(<%= position_dnr %> of <%= position_count %>)</span>
-    </div>
-    <br clear="all" />
+    <div class="row secondary">
+        <div id="und" class="positionId col-sm-4" data-position="undecided" title="Click to filter by Undecided">
+            <span class="percent"><%= percent_und %>%</span>
+            <br />
+            <span class="position">Undecided</span>
+            <br />
+            <span class="count">(<%= position_und %> of <%= position_count %>)</span></div>
+        <div id="dnr" class="positionId col-sm-4" data-position="did-not-respond" title="Click to filter by Did not respond">
+            <span class="percent"><%= percent_dnr %>%</span> 
+            <br />
+            <span class="position">Did not respond</span> 
+            <br />
+            <span class="count">(<%= position_dnr %> of <%= position_count %>)</span>
+        </div>
+        <div id="nc" class="positionId col-sm-4" data-position="no-comment" title="Click to filter by No comment">
+            <span class="percent"><%= percent_nc %>%</span>
+            <br />
+            <span class="position">No comment</span> 
+            <br />
+            <span class="count">(<%= position_nc %> of <%= position_count %>)</span>
+        </div>
+  </div>
 </div>
