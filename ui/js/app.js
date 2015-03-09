@@ -205,7 +205,7 @@ App.QuotesListView = Backbone.View.extend({
     collection: App.quotes,
     initialize: function(options) {
         // Listen to events on the collection
-        this.listenTo(this.collection, "add remove sync reset", this.render);
+        this.listenTo(this.collection, "reset", this.render);
     },
     template: "quotes",
     serialize: function() {
@@ -217,7 +217,7 @@ App.QuotesListView = Backbone.View.extend({
         var shuffled = this.collection.shuffle();
         var quote    = shuffled.pop(1);
         if (quote) {
-            this.insertView("#quotes-list", new App.QuotesListItemView({
+            this.setView("#quotes-list", new App.QuotesListItemView({
                 model: quote
             }));
         }
@@ -229,7 +229,6 @@ App.QuotesListView = Backbone.View.extend({
 App.QuotesListItemView = Backbone.View.extend({
     el: false,
     initialize: function(options) {
-        console.log(options);
     },
     template: "quotes-list-item"
 });
@@ -303,6 +302,7 @@ App.CouncillorsListView = Backbone.View.extend({
     serialize: function() {
     },
     events: {
+        "click .councillor": "viewCouncillor"
     },
     beforeRender: function() {
         // Add the subviews to the view
@@ -319,6 +319,14 @@ App.CouncillorsListView = Backbone.View.extend({
             layoutMode: 'fitRows'
         });
     },
+    viewCouncillor: function(e) {
+        var councillorId = $( e.currentTarget ).attr('data-id');
+        var councillor = App.councillors.findWhere({id: councillorId });
+        var view = App.Layout.setView("#detail", new App.CouncillorDetailView({
+            model: councillor
+        }));
+        view.render();
+    }
 });
 
 // View: CouncillorsListItem
@@ -328,6 +336,16 @@ App.CouncillorsListItemView = Backbone.View.extend({
     },
     template: "councillors-list-item"
 });
+
+App.CouncillorDetailView = Backbone.View.extend({
+    initialize: function(options) {
+    },
+    template: "councillor-detail",
+    afterRender: function() {
+         $('#modalDetail').modal();
+    }
+});
+
 
 // View: ChartList
 
@@ -342,13 +360,26 @@ App.PositionScoreboardView = Backbone.View.extend({
     },
     template: "position-scoreboard",
     events: {
+        "click .positionId": "filterList"
     },
     beforeRender: function() {
     },
     afterRender: function() {
-    }
+    },
+    filterList: function(e) {
+        var positionId = $( e.currentTarget ).attr("data-position");
+            var filterClass = '.' + positionId;
+                // Filter the stats
+            App.container.isotope({filter: filterClass });
+        }
 });
 
+// Loader
+App.LoaderView = Backbone.View.extend({
+    initialize: function(options) {
+    },
+    template: "loader"
+});
 // ===================================================================
 // Layouts
 // ===================================================================
@@ -358,10 +389,14 @@ App.Layout = new Backbone.Layout({
     views: {
         //"header": new App.HeaderView(),
         //"footer": new App.FooterView()
-        "#quotes": new App.QuotesListView(),
-        "#locations": new App.LocationsListView(),
-        "#councillors": new App.CouncillorsListView(),
-        "#scoreboard": new App.PositionScoreboardView()
+        //"#loader": new App.LoaderView()
+        //"#quotes": new App.QuotesListView(),
+        //"#locations": new App.LocationsListView(),
+        //"#councillors": new App.CouncillorsListView(),
+        //"#scoreboard": new App.PositionScoreboardView(),
+    },
+    afterRender: function() {
+        $("#loader").remove();
     }
 });
 
@@ -381,6 +416,11 @@ $(document).ready( function() {
         //App.calculator = new App.Calculator();
         //App.calculator.calculate(councillors);
         App.stats.calculate(councillors);
+        // Render the whole enchillada
+        App.Layout.insertView("#quotes", new App.QuotesListView());
+        App.Layout.insertView("#locations", new App.LocationsListView());
+        App.Layout.insertView("#councillors", new App.CouncillorsListView());
+        App.Layout.insertView("#scoreboard", new App.PositionScoreboardView());
+        App.Layout.render();
     } });
-    App.Layout.render();
 });
