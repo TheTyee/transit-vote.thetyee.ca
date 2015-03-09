@@ -56,6 +56,7 @@ Variables
 @articleHeaders: #628C00;
 @articleDesc: #575756;
 @linkText: #083643;
+@background: #e3e3e3;
 
 // Style tiles, Fonts
 // TODO come back to this once TypeKit is working
@@ -81,6 +82,7 @@ Global
 
 body {
     font-family: @fontDefault;
+    background: @background;
 }
 
 
@@ -95,18 +97,64 @@ h1, h2, h3, h4 {
 /* ==========================================================================
 Layout
 ========================================================================== */
-#content {
-    min-height: 600px;
+
+header {
+    .container {
+        padding: 0;
+        text-align: center;
+    }
+    h1 {
+        text-indent: -5000px;
+        background: url('/ui/img/tyee_logo.png') top center no-repeat;
+        padding-top: 50px;
+    }
+    h2 {
+        background: @darkBlue;
+        color: white;
+    }
+    
+}
+
+.container {
+    background: white;
+}
+
+.sharing {
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+    background: @background;
+}
+
+footer {
+    .container {
+        padding-top: 60px;
+    }
 }
 
 #loader {
     text-align: center;
-    padding-top: 25%;
+    padding-top: 10%;
 }
 
 /* ==========================================================================
 Modules 
 ========================================================================== */
+
+// Quote
+blockquote {
+  border-left: none; 
+  padding-left: 0;
+}
+
+// Detail view
+h4.modal-title {
+    font-size: 2em;
+}
+.modal h5 {
+    font-size: 1.6em;
+}
 
 // Module: Councillor's gallery w/ Isotope
 .councillor { 
@@ -148,8 +196,6 @@ Modules
     color: #ccc;
 }
 
-
-
 #locations select {
     width: 240px;
     height: 34px;
@@ -165,7 +211,7 @@ Modules
 #charts div {
     float: left;
     width: 49%;
-    margin-right: 2px;
+    margin-right: 4px;
     text-align: center;
 }
 

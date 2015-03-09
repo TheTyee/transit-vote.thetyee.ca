@@ -7,9 +7,12 @@
         <h4 class="modal-title" id="councillorName"><%= fullname %>, <%= municipality %></h4>
       </div>
       <div class="modal-body">
-          <h5 id="detail-position">Position: <%= position %></p>
+          <h5 id="detail-position">Position: <%= position %></h5>
           <% if ( quote ) { %>
-          <blockquote><%= quote %></blockquote>
+            <blockquote>
+                <i class="fa fa-quote-left fa-3x pull-left fa-border"></i><p><%= quote %><small><%= fullname %>, <%= municipality %></small></p>
+            </blockquote>
+            <br clear="all" />
           <% } %>
           <% if ( website_city ) { %>
           <p id="detail-web-city"><a href="<%= website_city %>"><%= fullname %>'s page on the <%= municipality %> website.</a></p>
@@ -23,7 +26,7 @@
           <p id="linkedin"><i class="fa fa-linkedin"></i> <a href="<%= linkedin %>"><%= linkedin %></a></p>
           <p id="facebook"><i class="fa fa-facebook"></i> <a href="<%= facebook %>"><%= facebook %></a></p>
           <hr class="soften">
-          <p class="info-missing">Information missing? Please <a href="mailto:editor@thetyee.ca">send us a note with the details</a>.</p>
+          <p class="info-missing">Information missing? Please <a href="mailto:editor@thetyee.ca?subject=Update for <%= fullname %>">send us a note with the details</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
