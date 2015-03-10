@@ -1,0 +1,25 @@
+<div class="councillor <%= municipalityId %> <%= positionId %>" id="<%= id %>-mobile" data-id="<%= id %>">
+    <div class="photo">
+        <img src="/ui/img/thumbs/<%= id %>.jpg" width="60" height="60" />
+    </div>
+    <div class="position-icon">
+    <% if ( position === "Yes" ) { %>
+    <i class="glyphicon glyphicon-ok-circle"></i>
+    <% } else if ( position === "No" ) { %>
+    <i class="glyphicon glyphicon-remove-circle"></i>
+    <% } else if ( position === "Undecided" ) { %>
+    <i class="glyphicon glyphicon-question-sign"></i>
+    <% } else if ( position === "Did not respond" ) { %>
+    <i class="glyphicon glyphicon-exclamation-sign"></i>
+    <% } else if ( position === "No comment" ) { %>
+    <i class="glyphicon glyphicon-ban-circle"></i>
+    <% } %>
+    </div>
+    <div class="info">
+        <div>
+        <h3><%= fullname %></h3>
+        <h4><%= municipality %></h4>
+        </div>
+    </div>
+<hr class="soften" />
+</div>

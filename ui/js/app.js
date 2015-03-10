@@ -306,10 +306,13 @@ App.CouncillorsListView = Backbone.View.extend({
             this.insertView("#councillors-list", new App.CouncillorsListItemView({
                 model: councillor
             }));
+            this.insertView("#councillors-list-mobile", new App.CouncillorsListItemViewMobile({
+                model: councillor
+            }));
         }, this);
     },
     afterRender: function() {
-        App.container = $('#councillors-list');
+        App.container = $('.isotope-list');
         App.container.isotope({
             itemSelector: '.councillor',
             layoutMode: 'fitRows'
@@ -331,6 +334,13 @@ App.CouncillorsListItemView = Backbone.View.extend({
     initialize: function(options) {
     },
     template: "councillors-list-item"
+});
+// View: CouncillorsListItemMobile
+App.CouncillorsListItemViewMobile = Backbone.View.extend({
+    //el: false,
+    initialize: function(options) {
+    },
+    template: "councillors-list-item-mobile"
 });
 
 App.CouncillorDetailView = Backbone.View.extend({
