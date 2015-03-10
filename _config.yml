@@ -47,6 +47,7 @@ exclude:
   - bower_components
   - Gruntfile.js
   - gemfile
+  - Gemfile
   - Gemfile.lock
   - _vendor
   - _fullsize
