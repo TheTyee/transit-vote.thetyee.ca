@@ -31,7 +31,7 @@ social:
     facebook:
         fb_admins:
             - 12345
-        og_image: 'http://transit-site.thetyee.ca/ui/img/transit-vote-share.png'
+        og_image: 'http://transit-vote.thetyee.ca/ui/img/transit-vote-share.png'
         og_sitename:
     twitter:
     gplus:
@@ -61,10 +61,10 @@ assets:
   # Base URL of assets paths.
   baseurl: /assets/
   sources:
-    - ui/js
-    - ui/img
-    - ui/less
-    - ui/css
+    - ui/js/
+    - ui/img/
+    - ui/less/
+    - ui/templates/
     - bower_components/jquery/dist/ 
     - bower_components/modernizr/
     - bower_components/bootstrap/dist/js/
