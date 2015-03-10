@@ -8,3 +8,7 @@ bower_components
 _Archive
 _vendor
 Gemfile.lock
+_data
+_fullsize
+cpanfile.snapshot
+local
