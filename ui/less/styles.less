@@ -127,7 +127,7 @@ header {
     padding: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-    text-align: right;
+    text-align: center;
     background: @background;
 }
 
@@ -294,29 +294,32 @@ Progressively enhance for larger screens
 ========================================================================== */
 
 @media screen and (min-width: 768px) { /* Adjust for large desktop */
-#charts #no, #charts #yes {
-    color: white; 
-    text-shadow: black 1px 2px 3px;
-    padding-bottom: 10px;
-    span.percent {
-        font-size: 4em;
-        font-weight: bold;
+    .sharing {
+        text-align: right;
+    }
+    #charts #no, #charts #yes {
+        color: white; 
+        text-shadow: black 1px 2px 3px;
+        padding-bottom: 10px;
+        span.percent {
+            font-size: 4em;
+            font-weight: bold;
+        }
+
+        span.position {
+            font-size: 3em;
+            font-weight: bold;
+            line-height: 14px;
+        }
     }
 
-    span.position {
-        font-size: 3em;
-        font-weight: bold;
-        line-height: 14px;
+    #charts .secondary div {
+        padding: 10px 0 10px 0;
     }
-}
-
-#charts .secondary div {
-    padding: 10px 0 10px 0;
-}
-#charts .secondary div span.percent {
-    font-size: 1.2em;
-    font-weight: bold;
-}
+    #charts .secondary div span.percent {
+        font-size: 1.2em;
+        font-weight: bold;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) { /* Adjust for standard desktop */
