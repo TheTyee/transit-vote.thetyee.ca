@@ -10,6 +10,15 @@
 //= require backbone.tabletopSync.js
 //= require isotope.pkgd.js
 // Then the JST templates
+//= require position-scoreboard
+//= require councillors-list-item-mobile
+//= require councillors-list
+//= require councillors-list-item
+//= require councillor-detail
+//= require quotes-list-item
+//= require locations-list
+//= require locations-list-item
+//= require quotes
 
 window.App = {};
 
