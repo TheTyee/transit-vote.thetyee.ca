@@ -17,6 +17,8 @@ There's extra stuff in here for local development with Grunt, which can be ignor
 
 `git clone https://github.com/TheTyee/static-app-template`
 
+Enter the project directory that was just created and then run:
+
 `git submodule init && git submodule update`
 
 2. Install the JavaScript dependencies
